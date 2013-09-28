@@ -4,6 +4,8 @@
   
 */
 require('digger-utils-for-angular');
+require('bootstrap-tree-for-angular');
+
 var template = require('./template');
 
 angular
