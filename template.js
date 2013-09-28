@@ -1,0 +1,1 @@
+module.exports = '<div>\nTHis is a tree\n\n <abn-tree tree-data="treedata" icon-leaf="icon-file" on-select="container_select(branch)" expand-level="4"></abn-tree>\n \n</div>';
