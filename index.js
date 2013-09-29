@@ -51,7 +51,7 @@ angular
             $scope.title = container.title();
           }
 
-          $scope.treedata = container.children().models;
+          $scope.treedata = container.models;
         })
 
         $scope.container_select = function(model){
