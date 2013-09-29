@@ -20,18 +20,42 @@ angular
     //field.required && showvalidate && containerForm[field.name].$invalid
     return {
       restrict:'EA',
-      scope:true,
+      scope:{
+        container:'=',
+        title:'=',
+        depth:'='
+      },
       replace:true,
+      transclude:true,
       template:template,
       controller:function($scope){
 
-        $scope.$watch('$digger.models', function(newmodels){
-          $scope.treedata = newmodels;
+        $scope.depth = $scope.depth || 4;
+        $scope.treedata = [];
+        
+        $scope.$watch('container', function(container){
+          if(!container){
+            return;
+          }
+          
+          var warehouse = container.diggerwarehouse();
+
+          container.recurse(function(c){
+            c.attr('label', c.title());
+            if(!c.diggerwarehouse()){
+              c.diggerwarehouse(warehouse);
+            }
+          })
+
+          if(!($scope.title || '').match(/\w/)){
+            $scope.title = container.title();
+          }
+
+          $scope.treedata = container.children().models;
         })
 
-        $scope.container_select = function(id){
-          console.log('-------------------------------------------');
-          console.log('yo');
+        $scope.container_select = function(model){
+          $scope.$emit('tree:selected', $scope.container.spawn(model));
         }
       }
     }
