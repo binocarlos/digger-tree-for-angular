@@ -22,6 +22,7 @@ angular
       restrict:'EA',
       scope:{
         container:'=',
+        selectedid:'=',
         title:'=',
         depth:'='
       },
@@ -37,7 +38,7 @@ angular
           if(!container){
             return;
           }
-          
+
           var warehouse = container.diggerwarehouse();
 
           container.recurse(function(c){

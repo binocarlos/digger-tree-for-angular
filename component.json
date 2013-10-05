@@ -5,7 +5,6 @@
   "version": "0.0.1",
   "keywords": [],
   "dependencies": {
-    "binocarlos/angular-component": "*",
     "binocarlos/digger-utils-for-angular": "*",
     "binocarlos/bootstrap-tree-for-angular": "*"
   },
