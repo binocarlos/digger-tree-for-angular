@@ -24,6 +24,8 @@ angular
         container:'=',
         selectedid:'=',
         title:'=',
+        iconfn:'=',
+        filter:'@',
         depth:'='
       },
       replace:true,
@@ -45,6 +47,12 @@ angular
             c.attr('label', c.title());
             if(!c.diggerwarehouse()){
               c.diggerwarehouse(warehouse);
+            }
+            if($scope.filter){
+              c.data('tree_filter', c.match($scope.filter));
+            }
+            if($scope.iconfn){
+              c.data('tree_icon', $scope.iconfn(c));
             }
           })
 
