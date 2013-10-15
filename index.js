@@ -35,6 +35,34 @@ angular
 
         $scope.depth = $scope.depth || 4;
         $scope.treedata = [];
+
+        var to_expand = null;
+        var to_contract = null;
+        var to_select = null;
+
+        $scope.$on('tree:expand', function($e, container){
+          if(!$scope.container){
+            to_expand = container;
+            return;
+          }
+          $scope.container.find('=' + container.diggerid()).data('expanded', true);
+        })
+
+        $scope.$on('tree:contract', function($e, container){
+          if(!$scope.container){
+            to_contract = container;
+            return;
+          }
+          $scope.container.find('=' + container.diggerid()).data('expanded', false);
+        })
+
+        $scope.$on('tree:select', function($e, container){
+          if(!$scope.container){
+            to_select = container;
+            return;
+          }
+          $scope.$broadcast('tree:setselected', container.get(0));
+        })
         
         $scope.$watch('container', function(container){
           if(!container){
@@ -62,6 +90,21 @@ angular
           }
 
           $scope.treedata = container.models;
+
+          if(to_expand){
+            $scope.$emit('tree:expand', to_expand);
+            to_expand = null;
+          }
+
+          if(to_contract){
+            $scope.$emit('tree:contract', to_contract);
+            to_contract = null;
+          }
+
+          if(to_select){
+            $scope.$emit('tree:select', to_select);
+            to_select = null;
+          }
         })
 
         $scope.container_select = function(model){
