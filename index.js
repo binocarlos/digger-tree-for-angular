@@ -43,6 +43,7 @@ angular
 
           var warehouse = container.diggerwarehouse();
 
+          container.data('expanded', true);
           container.recurse(function(c){
             c.attr('label', c.title());
             if(!c.diggerwarehouse()){
