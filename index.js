@@ -90,9 +90,6 @@ angular
 
           $scope.treedata = container.models;
 
-          console.log('-------------------------------------------');
-          console.dir($scope.treedata);
-
           if(to_expand){
             $scope.$emit('tree:expand', to_expand);
             to_expand = null;
