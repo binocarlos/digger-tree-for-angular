@@ -23,7 +23,6 @@ angular
       scope:{
         container:'=',
         selectedid:'=',
-        title:'=',
         iconfn:'=',
         filter:'@',
         depth:'='
@@ -91,6 +90,9 @@ angular
 
           $scope.treedata = container.models;
 
+          console.log('-------------------------------------------');
+          console.dir($scope.treedata);
+
           if(to_expand){
             $scope.$emit('tree:expand', to_expand);
             to_expand = null;
@@ -105,6 +107,7 @@ angular
             $scope.$emit('tree:select', to_select);
             to_select = null;
           }
+
         })
 
         $scope.container_select = function(model){
