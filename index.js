@@ -55,6 +55,28 @@ angular
           $scope.container.find('=' + container.diggerid()).data('expanded', false);
         })
 
+        $scope.$on('tree:setselected', function(ev, selected){
+          if(!selected){
+            return;
+          }
+
+          
+
+          var current = $scope.container.find('=' + selected._digger.diggerid);
+
+          var ancestors = [current];
+
+          current.data('expanded', true);
+          while(current.diggerparentid()){
+            current = $scope.container.find('=' + current.diggerparentid())
+            current.data('expanded', true);
+            ancestors.unshift(current);
+          }
+
+          // this code is starting to get horrible and I hate myself
+          $scope.$emit('tree:ancestors', ancestors);
+        })
+
         $scope.$on('tree:select', function($e, container){
           if(!$scope.container){
             to_select = container;
@@ -63,10 +85,12 @@ angular
           $scope.$broadcast('tree:setselected', container.get(0));
         })
         
-        $scope.$watch('container', function(container){
-          if(!container){
+        $scope.$watch('container.models', function(models){
+          if(!models){
             return;
           }
+
+          var container = $digger.create(models);
 
           var warehouse = container.diggerwarehouse();
 
@@ -105,7 +129,7 @@ angular
             to_select = null;
           }
 
-        })
+        }, true)
 
         $scope.container_select = function(model){
           $scope.$emit('tree:selected', $scope.container.spawn(model));
