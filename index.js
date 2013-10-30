@@ -101,11 +101,22 @@ angular
               c.diggerwarehouse(warehouse);
             }
             if($scope.filter){
-              c.data('tree_filter', c.match($scope.filter));
+              c.data('tree_filter', c.tag()=='_supplychain' || c.match($scope.filter));
             }
             if($scope.iconfn){
               c.data('tree_icon', $scope.iconfn(c));
             }
+
+            var children = c.get(0)._children;
+
+            if(children){
+              children.sort(function(a, b) {
+                var textA = (a.name || a._digger.tag).toUpperCase();
+                var textB = (b.name || b._digger.tag).toUpperCase();
+                return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+              });  
+            }
+            
           })
 
           if(!($scope.title || '').match(/\w/)){
