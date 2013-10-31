@@ -105,28 +105,7 @@ angular
             }
             if($scope.iconfn){
               c.data('tree_icon', $scope.iconfn(c));
-            }
-
-            var children = c.get(0)._children;
-
-            if(children){
-              children.sort(function(a, b) {
-                var textA = (a.name || a._digger.tag).toUpperCase();
-                var textB = (b.name || b._digger.tag).toUpperCase();
-                var folderA = (a._digger.tag=='folder');
-                var folderB = (b._digger.tag=='folder');
-
-                if(folderA && !folderB){
-                  return -1;
-                }
-                else if(folderB && !folderA){
-                  return 1;
-                }
-                
-                return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-              });  
-            }
-            
+            }            
           })
 
           if(!($scope.title || '').match(/\w/)){
