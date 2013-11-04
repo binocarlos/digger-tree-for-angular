@@ -96,7 +96,7 @@ angular
 
           container.data('expanded', true);
           container.recurse(function(c){
-            c.attr('label', c.title());
+            //c.data('label', c.title());
             if(!c.diggerwarehouse()){
               c.diggerwarehouse(warehouse);
             }
