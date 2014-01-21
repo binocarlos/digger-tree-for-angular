@@ -3,15 +3,15 @@
   we are in private scope (component.io)
   
 */
-require('digger-utils-for-angular');
-require('bootstrap-tree-for-angular');
+;
+;
 
 var template = require('./template');
 
 angular
   .module('digger.tree', [
-    'digger.utils',
-    'angularBootstrapNavTree'
+    require('digger-utils-for-angular'),
+    require('bootstrap-tree-for-angular')
   ])
 
 
