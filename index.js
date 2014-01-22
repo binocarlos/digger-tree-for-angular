@@ -3,8 +3,7 @@
   we are in private scope (component.io)
   
 */
-;
-;
+module.exports = 'digger.tree';
 
 var template = require('./template');
 
