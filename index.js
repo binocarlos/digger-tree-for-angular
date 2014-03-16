@@ -1,8 +1,3 @@
-/*
-
-  we are in private scope (component.io)
-  
-*/
 module.exports = 'digger.tree';
 
 var template = require('./template');
@@ -54,14 +49,9 @@ angular
           $scope.container.find('=' + container.diggerid()).data('expanded', false);
         })
 
-        $scope.$on('tree:setselected', function(ev, selected){
-          if(!selected){
-            return;
-          }
+        $scope.$on('tree:selectid', function(ev, id){
 
-          
-
-          var current = $scope.container.find('=' + selected._digger.diggerid);
+          var current = $scope.container.find('=' + id);
 
           var ancestors = [current];
 
@@ -76,10 +66,21 @@ angular
           $scope.$emit('tree:ancestors', ancestors);
         })
 
+        $scope.$on('tree:setselected', function(ev, selected){
+          if(!selected){
+            return;
+          }
+          $scope.$emit('tree:selectid', selected._digger.diggerid);
+          
+        })
+
         $scope.$on('tree:select', function($e, container){
           if(!$scope.container){
             to_select = container;
             return;
+          }
+          if(!container){
+            container = $scope.container;
           }
           $scope.$broadcast('tree:setselected', container.get(0));
         })
